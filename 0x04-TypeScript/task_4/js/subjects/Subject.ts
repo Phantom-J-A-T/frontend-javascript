@@ -11,4 +11,5 @@ namespace Subjects {
       }
     }
   }
-  
+
+  // setteacher(teacher:Teacher)
