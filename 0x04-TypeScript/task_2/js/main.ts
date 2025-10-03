@@ -45,20 +45,20 @@ class Teacher implements TeacherInterface {
 }
 
 // Factory function
-function createEmployee(salary: number | string): Director | Teacher {
-  if (salary < 500) {   // ✅ required syntax
+export function createEmployee(salary: number | string): Director | Teacher {
+  if (typeof salary === "number" && salary < 500) {
     return new Teacher();
   }
   return new Director();
 }
 
-// Type predicate
-function isDirector(employee: Director | Teacher): employee is Director {
+// ✅ Exported type predicate
+export function isDirector(employee: Director | Teacher): employee is Director {
   return employee instanceof Director;
 }
 
-// Function executeWork
-function executeWork(employee: Director | Teacher): string {
+// ✅ Exported executeWork
+export function executeWork(employee: Director | Teacher): string {
   if (isDirector(employee)) {
     return employee.workDirectorTasks();
   }
