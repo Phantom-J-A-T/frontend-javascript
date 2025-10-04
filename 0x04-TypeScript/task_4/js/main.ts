@@ -1,70 +1,39 @@
-// task_2/js/main.ts
+// task_4/js/main.ts
 
-// DirectorInterface definition
-interface DirectorInterface {
-  workFromHome(): string;
-  getCoffeeBreak(): string;
-  workDirectorTasks(): string;
-}
+/// <reference path="./subjects/Teacher.ts" />
+/// <reference path="./subjects/Subject.ts" />
+/// <reference path="./subjects/Cpp.ts" />
+/// <reference path="./subjects/Java.ts" />
+/// <reference path="./subjects/React.ts" />
 
-// TeacherInterface definition
-interface TeacherInterface {
-  workFromHome(): string;
-  getCoffeeBreak(): string;
-  workTeacherTasks(): string;
-}
+import { Subjects } from "./subjects/Teacher";
 
-// Director class implementing DirectorInterface
-class Director implements DirectorInterface {
-  workFromHome(): string {
-    return "Working from home";
-  }
+// Create and export constants for each subject
+export const cpp = new Subjects.Cpp();
+export const java = new Subjects.Java();
+export const react = new Subjects.React();
 
-  getCoffeeBreak(): string {
-    return "Getting a coffee break";
-  }
+// Create and export one Teacher object
+export const cTeacher: Subjects.Teacher = {
+  firstName: "John",
+  lastName: "Doe",
+  experienceTeachingC: 10,
+};
 
-  workDirectorTasks(): string {
-    return "Getting to director tasks";
-  }
-}
+// For Cpp
+console.log("C++");
+cpp.setTeacher(cTeacher);
+console.log(cpp.getRequirements());
+console.log(cpp.getAvailableTeacher());
 
-// Teacher class implementing TeacherInterface
-class Teacher implements TeacherInterface {
-  workFromHome(): string {
-    return "Cannot work from home";
-  }
+// For Java
+console.log("Java");
+java.setTeacher(cTeacher);
+console.log(java.getRequirements());
+console.log(java.getAvailableTeacher());
 
-  getCoffeeBreak(): string {
-    return "Cannot have a break";
-  }
-
-  workTeacherTasks(): string {
-    return "Getting to work";
-  }
-}
-
-// Factory function
-export function createEmployee(salary: number | string): Director | Teacher {
-  if (typeof salary === "number" && salary < 500) {
-    return new Teacher();
-  }
-  return new Director();
-}
-
-// ✅ Exported type predicate
-export function isDirector(employee: Director | Teacher): employee is Director {
-  return employee instanceof Director;
-}
-
-// ✅ Exported executeWork
-export function executeWork(employee: Director | Teacher): string {
-  if (isDirector(employee)) {
-    return employee.workDirectorTasks();
-  }
-  return employee.workTeacherTasks();
-}
-
-// ------------------- TESTS -------------------
-console.log(executeWork(createEmployee(200)));   // Getting to work
-console.log(executeWork(createEmployee(1000)));  // Getting to director tasks
+// For React
+console.log("React");
+react.setTeacher(cTeacher);
+console.log(react.getRequirements());
+console.log(react.getAvailableTeacher());
